@@ -637,10 +637,21 @@ input::placeholder {
   margin-right: var(--global-whitespace-sm);
 }
 
+.c-option-list {
+  margin-bottom: calc(3 * var(--global-baseline));
+}
+
+.c-option-list__item {
+  margin-bottom: calc(3 * var(--global-baseline));
+}
+
 .c-custom-option {
   /* Gebruik flexbox op .c-custom-option om de tekst en de fake input naast elkaar te plaatsen. */
   display: flex;
   align-items: center;
+
+  --custom-option-borderColor: var(--global-input-borderColor);
+  --custom-option-focus-borderColor: var(--global-input-focus-borderColor);
 }
 
 .c-custom-option__symbol {
@@ -650,12 +661,13 @@ input::placeholder {
   transform: scale(0);
   will-change: opacity, transform;
 
-  transition: opacity 150ms ease-out, transform 150ms ease-in;
+  transition: opacity 100ms ease-out, transform 100ms ease-in;
 }
 
 .c-custom-option__fake-input {
-  justify-content: center;
   display: flex;
+
+  justify-content: center;
   align-items: center;
 
   width: var(--global-whitespace-md);
@@ -673,10 +685,13 @@ input::placeholder {
 }
 
 .c-custom-option__fake-input--radio {
-  border-radius: 50%;
-
   display: flex;
   justify-content: center;
+
+  border-radius: 50%;
+}
+
+.c-custom-option:focus + .c-custom-option {
 }
 
 .c-option--hidden:checked + .c-custom-option {
@@ -690,11 +705,14 @@ input::placeholder {
   transform: scale(1);
 }
 
-.c-option--hidden:focus + .c-custom-option {
-  background-color: hotpink;
+.c-option--hidden:focus + .c-custom-option .c-custom-option__fake-input,
+.c-option--hidden:active + .c-custom-option .c-custom-option__fake-input {
+  border-color: var(--global-color-alpha);
+  box-shadow: var(--global-input-boxShadow);
 }
 
-.c-option--hidden:hover + .c-custom-option {
+.c-option--hidden:hover + .c-custom-option .c-custom-option__fake-input {
+  border-color: var(--global-color-alpha-dark);
 }
 
 .c-custom-option__fake-input--checkbox .c-custom-option__symbol {
